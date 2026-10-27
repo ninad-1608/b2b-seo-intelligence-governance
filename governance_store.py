@@ -17,7 +17,9 @@ import sqlite3
 from contextlib import closing, contextmanager
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent / "governance.db"  # never commit this file
+from paths import DATA_DIR
+
+DB_PATH = DATA_DIR / "governance.db"  # never commit this file
 
 STATUSES = ("Proposed", "Approved", "Needs changes", "Rejected", "Measuring", "Completed")
 APPROVED_LINEAGE = {"Approved", "Measuring", "Completed"}

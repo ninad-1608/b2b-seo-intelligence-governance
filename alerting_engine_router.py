@@ -18,6 +18,8 @@ import sqlite3
 import threading
 from contextlib import closing
 from pathlib import Path
+
+from paths import DATA_DIR
 from typing import Literal
 from urllib.parse import urlparse
 
@@ -32,7 +34,7 @@ from gsc_connector_router import _fernet, _get_connection, _status, load_rows
 
 router = APIRouter(prefix="/alerts", tags=["Alerting"])  # app.py mounts it under /api/v1
 
-DB_PATH = Path(__file__).resolve().parent / "alerts.db"  # never commit this file (holds encrypted webhook URLs)
+DB_PATH = DATA_DIR / "alerts.db"  # never commit this file (holds encrypted webhook URLs)
 SEVERITY_RANK = {"info": 1, "warning": 2, "critical": 3}
 MAX_PER_KIND = 10  # individual alerts per check family; the rest are summarised
 MIN_BASELINE_CLICKS = 30  # ignore percentage swings on tiny numbers

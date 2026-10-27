@@ -4,6 +4,7 @@ Run:  pip install fastapi uvicorn
       uvicorn app:app --reload
 """
 import io
+import os
 import sqlite3
 from collections import defaultdict
 from contextlib import closing
@@ -12,6 +13,7 @@ from typing import Literal
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
+from paths import DATA_DIR
 from ai_router import router as ai_router
 from decay_router import router as decay_router
 from geo_router import router as geo_router
@@ -35,7 +37,7 @@ from report_router import router as report_router
 from cannibalization_validation import router as cannibalization_validation_router, stored_evidence, validate_query
 from pydantic import BaseModel, Field
 
-DB_PATH = "accounts.db"
+DB_PATH = DATA_DIR / "accounts.db"
 MIN_IMPRESSIONS = 10  # a URL only counts toward cannibalization above this
 HIGH_RISK_IMPRESSIONS = 500  # total query impressions above this -> High
 MEDIUM_RISK_IMPRESSIONS = 100  # 100-500 -> Medium, anything lower -> Low
@@ -79,6 +81,8 @@ origins = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
 ]
+# Production dashboard origin(s), comma-separated, e.g. https://my-app.vercel.app
+origins += [o.strip().rstrip("/") for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

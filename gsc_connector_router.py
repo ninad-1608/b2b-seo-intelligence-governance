@@ -24,6 +24,8 @@ import threading
 import time
 from contextlib import closing
 from pathlib import Path
+
+from paths import DATA_DIR
 from urllib.parse import quote, urlencode
 
 import requests
@@ -35,7 +37,7 @@ from decay_router import DecayRequest, MetricRow, _run_decay
 
 router = APIRouter(prefix="/api/v1/gsc", tags=["Google Connector"])
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = DATA_DIR
 DB_PATH = BASE_DIR / "gsc_connector.db"  # never commit this file
 KEY_PATH = BASE_DIR / "gsc_connector.key"  # never commit this file
 

@@ -1,0 +1,32 @@
+# Render Blueprint: FastAPI backend with a persistent disk for the SQLite files.
+services:
+  - type: web
+    name: seo-intelligence-api
+    runtime: python
+    plan: starter            # cheapest always-on paid tier; the free tier has no disk
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /docs
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DATA_DIR
+        value: /var/data
+      - key: CORS_ORIGINS
+        sync: false          # your Vercel URL, e.g. https://my-app.vercel.app
+      - key: GSC_TOKEN_ENCRYPTION_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: PAGESPEED_API_KEY
+        sync: false

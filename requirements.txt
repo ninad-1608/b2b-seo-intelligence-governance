@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pandas
+pydantic
+anthropic
+openai
+cryptography
+reportlab
+requests
+python-dotenv

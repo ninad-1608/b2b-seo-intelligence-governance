@@ -7,6 +7,8 @@ import datetime
 import sqlite3
 from contextlib import closing
 from pathlib import Path
+
+from paths import DATA_DIR
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException, Response
@@ -16,7 +18,7 @@ from scoring_router import FactorRatings, score_opportunity
 
 router = APIRouter(prefix="/api/v1/priorities", tags=["Business Priorities"])
 
-DB_PATH = Path(__file__).resolve().parent / "priorities.db"
+DB_PATH = DATA_DIR / "priorities.db"
 LEVEL_RATING = {"High": 5, "Medium": 3, "Low": 1}
 DEFAULT_RATING = 3
 MAX_PRIORITIES = 200

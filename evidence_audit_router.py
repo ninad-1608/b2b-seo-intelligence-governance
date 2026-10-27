@@ -24,6 +24,8 @@ import time
 from contextlib import asynccontextmanager, closing, suppress
 from pathlib import Path
 
+from paths import DATA_DIR
+
 from fastapi import APIRouter
 
 import alerting_engine_router as alerting
@@ -33,7 +35,7 @@ import gsc_connector_router as gsc
 router = APIRouter(prefix="/audit", tags=["Evidence Audit"])  # app.py mounts it under /api/v1
 log = logging.getLogger("evidence_audit")
 
-DB_PATH = Path(__file__).resolve().parent / "audit.db"  # never commit this file
+DB_PATH = DATA_DIR / "audit.db"  # never commit this file
 STALE_DAYS = 7  # same line the "Needs your attention" strip uses
 ERROR_STALE_DAYS = 14
 DISCREPANCY_PCT = 25.0
