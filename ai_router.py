@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import re
+from pathlib import Path
 from urllib.parse import urlparse
 from typing import Literal
 
@@ -10,12 +11,14 @@ from pydantic import BaseModel, field_validator
 from openai import OpenAI
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path="C:/Users/Ninad/b2b-accounts/.env")
+# Relative to this file, so it works wherever the project is cloned. This module lives in the same folder as .env.
+ENV_PATH = Path(__file__).resolve().parent / ".env"
+load_dotenv(dotenv_path=ENV_PATH)
 
 print(
     "OPENROUTER_API_KEY loaded successfully"
     if os.getenv("OPENROUTER_API_KEY")
-    else "WARNING: OPENROUTER_API_KEY not found - check C:/Users/Ninad/b2b-accounts/.env"
+    else f"WARNING: OPENROUTER_API_KEY not found - check {ENV_PATH}"
 )
 
 router = APIRouter(prefix="/api/v1", tags=["AI SEO Engine"])
