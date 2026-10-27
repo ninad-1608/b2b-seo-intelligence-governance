@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: #f8fafc; /* slate-50 */
+  color: #0f172a; /* slate-900 */
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Module drawer. No animation-fill-mode on purpose: once the slide-in ends no transform remains, so
+   position:fixed dialogs rendered inside a module still anchor to the viewport. */
+@keyframes drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+@keyframes drawer-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.drawer-panel { animation: drawer-in 200ms ease-out; }
+.drawer-backdrop { animation: drawer-backdrop-in 200ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .drawer-panel, .drawer-backdrop { animation: none; }
+}

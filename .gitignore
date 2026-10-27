@@ -1,0 +1,17 @@
+# Databases & Local Runtime Storage
+*.db
+*.sqlite3
+backups/
+
+# Environment & OAuth Keys
+.env
+*.env.*
+gsc_connector.key
+client_secret*.json
+
+# Build & Dependency Artifacts
+.next/
+.next-guest/
+node_modules/
+__pycache__/
+*.pyc

@@ -1,0 +1,37 @@
+{
+  "name": "seo-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "backup": "python ../scripts/backup_database.py",
+    "backup:dry": "python ../scripts/backup_database.py --dry-run",
+    "backups": "python ../scripts/backup_database.py --list",
+    "pre-demo": "python ../scripts/pre_demo_check.py",
+    "pre-demo:live": "python ../scripts/pre_demo_check.py --url http://127.0.0.1:8010 --frontend",
+    "guest:check": "python ../scripts/guest_access.py check",
+    "guest:tunnel": "python ../scripts/guest_access.py tunnel",
+    "guest:serve": "python ../scripts/guest_access.py serve",
+    "build:guest": "node scripts/guest-next.mjs build",
+    "start:guest": "node scripts/guest-next.mjs start"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
